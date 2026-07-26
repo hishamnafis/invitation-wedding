@@ -60,33 +60,26 @@
   }
   #cover.slide-out{ transform: translateY(-100%); pointer-events:none; }
 
-  /* floating petals / ambient particles drifting down in the background */
-  .petals{ position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:1; }
-  .petal{
-    position:absolute; top:-6%;
-    width:9px; height:9px; border-radius:50% 0 50% 50%;
-    background:var(--rose);
-    opacity:.55;
-    animation: petalFall linear infinite, petalSway ease-in-out infinite;
+  .couple-illustration{
+    position:absolute;
+    bottom:-4%;
+    left:50%;
+    transform:translateX(-50%);
+    max-height:78%;
+    width:auto;
+    z-index:1;
+    pointer-events:none;
+    filter: drop-shadow(0 18px 26px rgba(60,30,20,0.28));
+    opacity:0;
+    animation: illoEnter 1.1s cubic-bezier(.22,1,.36,1) .1s forwards, illoFloat 5.5s ease-in-out 1.2s infinite;
   }
-  .petal:nth-child(odd){ background:var(--rose-soft); border-radius:50% 50% 0 50%; }
-  .p1{ left:6%;  width:8px;  height:8px;  animation-duration:13s, 3.4s; animation-delay:0s, 0s; }
-  .p2{ left:18%; width:11px; height:11px; animation-duration:17s, 4.1s; animation-delay:2s, .3s; }
-  .p3{ left:32%; width:7px;  height:7px;  animation-duration:11s, 3s;   animation-delay:4s, .6s; }
-  .p4{ left:48%; width:10px; height:10px; animation-duration:15s, 3.8s; animation-delay:1s, .2s; }
-  .p5{ left:63%; width:8px;  height:8px;  animation-duration:19s, 4.4s; animation-delay:3s, .5s; }
-  .p6{ left:76%; width:12px; height:12px; animation-duration:14s, 3.6s; animation-delay:5s, .8s; }
-  .p7{ left:88%; width:7px;  height:7px;  animation-duration:16s, 3.2s; animation-delay:1.6s, .1s; }
-  .p8{ left:95%; width:9px;  height:9px;  animation-duration:12s, 4s;   animation-delay:3.4s, .4s; }
-  @keyframes petalFall{
-    0%{ transform:translateY(-10vh); opacity:0; }
-    8%{ opacity:.55; }
-    92%{ opacity:.5; }
-    100%{ transform:translateY(110vh); opacity:0; }
+  @keyframes illoEnter{
+    from{ opacity:0; transform:translateX(-50%) translateY(40px) scale(.94); }
+    to{ opacity:1; transform:translateX(-50%) translateY(0) scale(1); }
   }
-  @keyframes petalSway{
-    0%,100%{ margin-left:0; }
-    50%{ margin-left:22px; }
+  @keyframes illoFloat{
+    0%,100%{ transform:translateX(-50%) translateY(0); }
+    50%{ transform:translateX(-50%) translateY(-10px); }
   }
 
   .cover-left{
@@ -161,21 +154,15 @@
     50%{ box-shadow:0 0 0 9px rgba(124,31,31,0); }
   }
 
-  .flourish.draw path{
-    stroke-dasharray:400;
-    stroke-dashoffset:400;
-    animation: drawFlourish 1.8s ease-out forwards;
-    animation-delay:.2s;
-  }
-  .flourish.br.draw path{ animation-delay:.5s; }
-  @keyframes drawFlourish{
-    to{ stroke-dashoffset:0; }
-  }
-
   @media (prefers-reduced-motion: reduce){
-    .petal, .ring-icon, .monogram, .cover-names .amp-swash, #openBtn,
-    .cover-left, .cover-center, .cover-right, .flourish.draw path{
+    .ring-icon, .monogram, .cover-names .amp-swash, #openBtn,
+    .cover-left, .cover-center, .cover-right,
+    .cd .num.tick, .cd-sep, .slide .inner,
+    .polaroid, .couple-photo,
+    .couple-illustration, .hero-illustration{
       animation:none !important;
+      transition:none !important;
+      opacity:1 !important;
     }
   }
 
@@ -202,6 +189,11 @@
     background:linear-gradient(160deg, var(--rose-soft), var(--rose) 55%, var(--maroon-2));
     display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px;
     color:var(--white);
+    animation: kenBurns 10s ease-in-out infinite alternate;
+  }
+  @keyframes kenBurns{
+    from{ transform:scale(1); }
+    to{ transform:scale(1.1); }
   }
   .slide .inner svg{ width:44px; height:44px; opacity:.85; }
   .slide .cap{ font-family:'Caveat',cursive; font-size:1.3rem; letter-spacing:.5px; }
@@ -245,12 +237,32 @@
 
   #hero{ text-align:center; padding-top:46px; }
   #hero .cover-names{ font-size:2rem; margin-bottom:6px; }
+  .hero-illustration{
+    display:block; width:100%; max-width:230px; height:auto; margin:0 auto 12px;
+    filter: drop-shadow(0 12px 18px rgba(60,30,20,0.22));
+    animation: heroIlloEnter 1s cubic-bezier(.22,1,.36,1) both, heroIlloFloat 5.5s ease-in-out 1s infinite;
+  }
+  @keyframes heroIlloEnter{
+    from{ opacity:0; transform:translateY(30px) scale(.94); }
+    to{ opacity:1; transform:translateY(0) scale(1); }
+  }
+  @keyframes heroIlloFloat{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-8px); }
+  }
   .save-date{ font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--maroon); letter-spacing:2px; font-size:1.15rem; margin:10px 0 18px; }
   .countdown{ display:flex; justify-content:center; align-items:baseline; gap:6px; margin:14px 0 20px; font-family:'Baloo 2',sans-serif; }
   .cd{ text-align:center; padding:0 4px; }
-  .cd .num{ font-weight:700; font-size:1.9rem; color:var(--maroon); }
+  .cd .num{ font-weight:700; font-size:1.9rem; color:var(--maroon); display:inline-block; }
+  .cd .num.tick{ animation: digitTick .45s cubic-bezier(.34,1.56,.64,1); }
+  @keyframes digitTick{
+    0%{ transform:translateY(-10px); opacity:0; }
+    60%{ transform:translateY(2px); opacity:1; }
+    100%{ transform:translateY(0); opacity:1; }
+  }
   .cd .lbl{ font-size:.58rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--ink-soft); }
-  .cd-sep{ font-size:1.5rem; color:var(--rose); transform:translateY(-6px); }
+  .cd-sep{ font-size:1.5rem; color:var(--rose); transform:translateY(-6px); animation: sepBlink 1s steps(1) infinite; }
+  @keyframes sepBlink{ 0%,49%{ opacity:1; } 50%,100%{ opacity:.25; } }
   .hero-msg{ font-family:'Cormorant Garamond',serif; font-size:1.05rem; font-style:italic; line-height:1.7; color:var(--ink-soft); max-width:320px; margin:0 auto; }
 
   .music-toggle{ display:flex; align-items:center; justify-content:center; gap:9px; font-family:'Caveat',cursive; font-size:1.15rem; color:var(--maroon); margin:18px 0 20px; cursor:pointer; }
@@ -271,12 +283,16 @@
     position:absolute; background:var(--white); padding:8px 8px 22px;
     box-shadow:0 10px 22px -10px rgba(60,30,20,0.4);
     font-size:.62rem; color:var(--ink-soft); text-align:center;
+    transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s ease, z-index 0s;
   }
   .polaroid .inner{ background:linear-gradient(135deg, var(--rose-soft), var(--rose)); width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:var(--maroon-2); }
   .polaroid svg{ width:20px; height:20px; }
   .p1{ width:130px; height:110px; left:10px; top:6px; transform:rotate(-7deg); z-index:2; }
   .p2{ width:110px; height:96px; left:150px; top:60px; transform:rotate(5deg); z-index:1; }
   .p3{ width:100px; height:88px; right:10px; top:0; transform:rotate(8deg); z-index:1; }
+  .p1:active, .p1:hover{ transform:rotate(-7deg) scale(1.08); box-shadow:0 16px 28px -12px rgba(60,30,20,0.5); z-index:5; }
+  .p2:active, .p2:hover{ transform:rotate(5deg) scale(1.08); box-shadow:0 16px 28px -12px rgba(60,30,20,0.5); z-index:5; }
+  .p3:active, .p3:hover{ transform:rotate(8deg) scale(1.08); box-shadow:0 16px 28px -12px rgba(60,30,20,0.5); z-index:5; }
 
   /* bride & groom */
   #bg-section{ background:var(--cream-2); }
@@ -288,7 +304,9 @@
     color:var(--maroon-2); font-size:.72rem; text-align:center; padding:8px;
     border:3px solid var(--white); box-shadow:0 14px 26px -14px rgba(60,30,20,0.4);
     transform:rotate(-2deg);
+    transition: transform .4s cubic-bezier(.34,1.56,.64,1);
   }
+  .couple-photo:active, .couple-photo:hover{ transform:rotate(-2deg) scale(1.05); }
   .person{ text-align:center; margin-bottom:14px; }
   .person.left{ text-align:left; padding-left:16px; }
   .person.right{ text-align:right; padding-right:16px; }
@@ -377,6 +395,7 @@
     .cover-names{ font-size:clamp(1.6rem, 7vw, 2.2rem); }
     .eyebrow{ font-size:clamp(1.1rem, 5vw, 1.4rem); }
     .content-panel .col{ max-width:100%; padding:0 4px; }
+    .couple-illustration{ max-height:50%; bottom:-2%; }
   }
 
   @media(max-width:380px){
@@ -388,25 +407,16 @@
 <body>
 <div class="stage">
 
-  <svg class="flourish tl draw" viewBox="0 0 200 200" fill="none">
+  <svg class="flourish tl" viewBox="0 0 200 200" fill="none">
     <path d="M5 5 C 40 5, 5 90, 60 90 C 110 90, 90 20, 150 30" stroke="#dcb8a8" stroke-width="6" stroke-linecap="round"/>
   </svg>
-  <svg class="flourish br draw" viewBox="0 0 200 200" fill="none">
+  <svg class="flourish br" viewBox="0 0 200 200" fill="none">
     <path d="M5 5 C 40 5, 5 90, 60 90 C 110 90, 90 20, 150 30" stroke="#dcb8a8" stroke-width="6" stroke-linecap="round"/>
   </svg>
 
   <!-- ============ COVER ============ -->
   <div id="cover">
-    <div class="petals" aria-hidden="true">
-      <span class="petal p1"></span>
-      <span class="petal p2"></span>
-      <span class="petal p3"></span>
-      <span class="petal p4"></span>
-      <span class="petal p5"></span>
-      <span class="petal p6"></span>
-      <span class="petal p7"></span>
-      <span class="petal p8"></span>
-    </div>
+    <img class="couple-illustration" src="couple-illustration.png" alt="Ardony & Eka" />
     <div class="cover-left">
       <svg class="ring-icon" viewBox="0 0 64 64" fill="none">
         <circle cx="24" cy="34" r="14" stroke="#7c1f1f" stroke-width="2"/>
@@ -476,6 +486,7 @@
     <div class="col">
 
       <section id="hero" class="fade-up">
+        <img class="hero-illustration" src="couple-illustration.png" alt="Ardony & Eka" />
         <p class="eyebrow">The Wedding Of</p>
         <h1 class="cover-names">Ardony <span class="amp-swash">+</span> Eka</h1>
         <p class="save-date">Save the Date</p>
@@ -626,6 +637,16 @@
   if(guest){ document.getElementById('guestName').textContent = decodeURIComponent(guest); }
 
   var weddingDate = new Date('2026-10-10T10:00:00+07:00').getTime();
+  function setCountdownDigit(id, value){
+    var el = document.getElementById(id);
+    var text = String(value).padStart(2,'0');
+    if(el.textContent !== text){
+      el.textContent = text;
+      el.classList.remove('tick');
+      void el.offsetWidth; /* restart animation */
+      el.classList.add('tick');
+    }
+  }
   function tickCountdown(){
     var now = new Date().getTime();
     var diff = weddingDate - now; if(diff < 0) diff = 0;
@@ -633,10 +654,10 @@
     var h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
     var m = Math.floor((diff%(1000*60*60))/(1000*60));
     var s = Math.floor((diff%(1000*60))/1000);
-    document.getElementById('cd-d').textContent = String(d).padStart(2,'0');
-    document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
-    document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
-    document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+    setCountdownDigit('cd-d', d);
+    setCountdownDigit('cd-h', h);
+    setCountdownDigit('cd-m', m);
+    setCountdownDigit('cd-s', s);
   }
   tickCountdown(); setInterval(tickCountdown, 1000);
 
