@@ -16,6 +16,9 @@
 .pigora-frame .photo-wrap{position:absolute;top:38px;left:0;width:260px;height:260px;clip-path:url(#pigoraClip);-webkit-clip-path:url(#pigoraClip);background:linear-gradient(135deg,#f0ded0,#dcb8a8);background-size:cover;background-position:center;transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
 .pigora-frame:hover .photo-wrap{transform:scale(1.04)}
 .pigora-frame .outline-svg{position:absolute;top:38px;left:0;width:260px;height:260px;pointer-events:none;filter:drop-shadow(0 10px 16px rgba(60,30,20,.3))}
+.story-illustration{display:block;width:100%;max-width:210px;height:auto;margin:6px auto 20px;filter:drop-shadow(0 12px 18px rgba(60,30,20,0.22));animation:storyIlloEnter .9s cubic-bezier(.22,1,.36,1) both,storyIlloFloat 5.5s ease-in-out .9s infinite}
+@keyframes storyIlloEnter{from{opacity:0;transform:translateY(26px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes storyIlloFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 </style>
 </head>
 <body>
@@ -108,6 +111,7 @@ Open Invitation
 </section>
 <section id="story-section" class="fade-up">
 <p class="section-title">Our Story</p>
+<img class="story-illustration" src="couple-illustration.png" alt="Ardony & Eka" />
 <div class="music-toggle" id="musicToggle">
 <span class="disc"></span><span id="musicLabel">tap to play</span>
 </div>
