@@ -20,6 +20,76 @@
 @keyframes storyIlloEnter{from{opacity:0;transform:translateY(26px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes storyIlloFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 </style>
+
+<!-- ====== TAMBAHAN ANIMASI LOOP AGAR UNDANGAN TERASA "HIDUP" ====== -->
+<style>
+/* Sulur/flourish di pojok layar bernapas pelan */
+.flourish.tl{animation:flourishBreatheTL 7s ease-in-out infinite}
+.flourish.br{animation:flourishBreatheBR 7s ease-in-out infinite}
+@keyframes flourishBreatheTL{0%,100%{transform:translate(0,0) rotate(0deg);opacity:.55}50%{transform:translate(4px,4px) rotate(2deg);opacity:.75}}
+@keyframes flourishBreatheBR{0%,100%{transform:rotate(180deg) translate(0,0);opacity:.55}50%{transform:rotate(180deg) translate(4px,4px);opacity:.75}}
+
+/* Garis putus-putus di bawah nama tamu berkedip lembut, seolah menyambut */
+#guestName{animation:guestUnderline 3s ease-in-out infinite}
+@keyframes guestUnderline{0%,100%{border-bottom-color:var(--maroon)}50%{border-bottom-color:var(--rose)}}
+
+/* Foto polaroid bergoyang pelan seperti tergantung, tetap bisa membesar saat hover */
+.p1{animation:swayP1 6s ease-in-out infinite}
+.p2{animation:swayP2 6.5s ease-in-out infinite .3s}
+.p3{animation:swayP3 5.8s ease-in-out infinite .6s}
+@keyframes swayP1{0%,100%{transform:rotate(-7deg) translateY(0)}50%{transform:rotate(-4deg) translateY(-4px)}}
+@keyframes swayP2{0%,100%{transform:rotate(5deg) translateY(0)}50%{transform:rotate(8deg) translateY(-5px)}}
+@keyframes swayP3{0%,100%{transform:rotate(8deg) translateY(0)}50%{transform:rotate(5deg) translateY(-4px)}}
+.p1:hover,.p1:active{animation-play-state:paused}
+.p2:hover,.p2:active{animation-play-state:paused}
+.p3:hover,.p3:active{animation-play-state:paused}
+
+/* Bingkai foto pengantin (pigora) melayang pelan */
+.pigora-frame{animation:pigoraFloat 6s ease-in-out infinite}
+@keyframes pigoraFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+
+/* Loop pita di atas bingkai pengantin bergoyang seperti tertiup angin */
+.pigora-frame .loop-wrap{transform-origin:top center;animation:loopSway 4s ease-in-out infinite}
+@keyframes loopSway{0%,100%{transform:translateX(-50%) rotate(-3deg)}50%{transform:translateX(-50%) rotate(3deg)}}
+
+/* Foto bulat couple-photo (jika dipakai) ikut melayang pelan */
+.couple-photo{animation:couplePhotoFloat 5.5s ease-in-out infinite}
+@keyframes couplePhotoFloat{0%,100%{transform:rotate(-2deg) translateY(0)}50%{transform:rotate(-1deg) translateY(-6px)}}
+.couple-photo:hover,.couple-photo:active{animation-play-state:paused}
+
+/* Cincin dekorasi di atas tanggal aktif berputar sangat pelan */
+.cal-ring{animation:calRingSpin 9s linear infinite;transform-origin:50% 55%}
+@keyframes calRingSpin{0%{transform:translateX(-50%) rotate(-4deg)}50%{transform:translateX(-50%) rotate(4deg)}100%{transform:translateX(-50%) rotate(-4deg)}}
+
+/* Lencana dekoratif di kartu acara berputar pelan seperti medali */
+.deco-badge{animation:badgeSpin 12s linear infinite;transform-origin:50% 50%}
+@keyframes badgeSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* Semua svg pembatas (deco-divider) berdenyut halus, seperti tinta yang hidup */
+.deco-divider{animation:dividerPulse 4.5s ease-in-out infinite}
+@keyframes dividerPulse{0%,100%{opacity:.75;transform:scale(1)}50%{opacity:1;transform:scale(1.03)}}
+
+/* Judul tiap section (Our Story, Bride & Groom, dst) sedikit berdenyut warna */
+.section-title{display:inline-block;animation:titleGlow 3.6s ease-in-out infinite}
+@keyframes titleGlow{0%,100%{color:var(--maroon);transform:translateY(0)}50%{color:var(--maroon-2);transform:translateY(-2px)}}
+
+/* Panel ayat (Ar-Rum) bernapas lewat garis atas/bawah */
+.verse-wrap{animation:verseGlow 5s ease-in-out infinite}
+@keyframes verseGlow{0%,100%{border-color:var(--line)}50%{border-color:var(--maroon)}}
+
+/* Kartu rekening bergetar halus di ikon nominal supaya terasa hidup */
+.bank-card .bk-num{display:inline-block;animation:bkNumFloat 4s ease-in-out infinite}
+@keyframes bkNumFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+
+/* Tulisan "A & E" di footer berdenyut lembut seperti detak jantung */
+footer .mono{display:inline-block;animation:heartbeatMono 3s ease-in-out infinite}
+@keyframes heartbeatMono{0%,100%{transform:scale(1)}25%{transform:scale(1.08)}40%{transform:scale(1)}55%{transform:scale(1.05)}70%{transform:scale(1)}}
+
+/* Hormati preferensi pengguna yang tidak suka animasi */
+@media (prefers-reduced-motion:reduce){
+.flourish.tl,.flourish.br,#guestName,.p1,.p2,.p3,.pigora-frame,.pigora-frame .loop-wrap,.couple-photo,.cal-ring,.deco-badge,.deco-divider,.section-title,.verse-wrap,.bank-card .bk-num,footer .mono{animation:none!important}
+}
+</style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute">
