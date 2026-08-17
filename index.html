@@ -14,10 +14,7 @@
 .hearts-divider{width:100%;max-width:260px;height:auto;margin:8px auto 18px}
 .footer-illustration{display:block;width:100%;max-width:190px;height:auto;margin:0 auto 20px;filter:drop-shadow(0 10px 16px rgba(60,30,20,0.22))}
 .deco-frame{position:absolute;inset:6px;pointer-events:none;opacity:.55}
-.pigora-frame{position:relative;width:260px;height:300px;margin:0 auto 22px;}
-.pigora-frame .photo-wrap{position:absolute;top:38px;left:0;width:260px;height:260px;clip-path:url(#pigoraClip);-webkit-clip-path:url(#pigoraClip);background:linear-gradient(135deg,#f0ded0,#dcb8a8);background-size:cover;background-position:center;transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
-.pigora-frame:hover .photo-wrap{transform:scale(1.04)}
-.pigora-frame .outline-svg{position:absolute;top:38px;left:0;width:260px;height:260px;pointer-events:none;filter:drop-shadow(0 10px 16px rgba(60,30,20,.3))}
+.gift-frame{position:relative;width:220px;aspect-ratio:700/1032;margin:0 auto 22px}.gift-photo{position:absolute;left:11.5%;right:11.5%;top:29.5%;bottom:23.5%;border-radius:18px;background-size:cover;background-position:center;transition:transform .4s cubic-bezier(.34,1.56,.64,1)}.gift-frame:hover .gift-photo{transform:scale(1.04)}.gift-outline{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;filter:drop-shadow(0 10px 16px rgba(60,30,20,.3))}
 .story-illustration{display:block;width:100%;max-width:210px;height:auto;margin:6px auto 20px;filter:drop-shadow(0 12px 18px rgba(60,30,20,0.22));animation:storyIlloEnter .9s cubic-bezier(.22,1,.36,1) both,storyIlloFloat 5.5s ease-in-out .9s infinite}
 @keyframes storyIlloEnter{from{opacity:0;transform:translateY(26px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes storyIlloFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
@@ -47,7 +44,7 @@
 .p3:hover,.p3:active{animation-play-state:paused}
 
 /* Bingkai foto pengantin (pigora) melayang pelan */
-.pigora-frame{animation:pigoraFloat 6s ease-in-out infinite}
+.gift-frame{animation:pigoraFloat 6s ease-in-out infinite}
 @keyframes pigoraFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 
 /* Foto bulat couple-photo (jika dipakai) ikut melayang pelan */
@@ -81,7 +78,7 @@ footer .mono{display:inline-block;animation:heartbeatMono 3s ease-in-out infinit
 
 /* Hormati preferensi pengguna yang tidak suka animasi */
 @media (prefers-reduced-motion:reduce){
-.flourish.tl,.flourish.br,#guestName,.p1,.p2,.p3,.pigora-frame,.couple-photo,.cal-ring,.deco-divider,.section-title,.verse-wrap,.bank-card .bk-num,footer .mono{animation:none!important}
+.flourish.tl,.flourish.br,#guestName,.p1,.p2,.p3,.gift-frame,.couple-photo,.cal-ring,.deco-divider,.section-title,.verse-wrap,.bank-card .bk-num,footer .mono{animation:none!important}
 }
 </style>
 </head>
@@ -194,11 +191,9 @@ Open Invitation
 </section>
 <section id="bg-section" class="fade-up">
 <p class="section-title">Bride &amp; Groom</p>
-<div class="pigora-frame">
-<div class="photo-wrap" style="background-image:url('foto-pengantin.jpg'), linear-gradient(135deg,#f0ded0,#dcb8a8);"></div>
-<svg class="outline-svg" viewBox="0 0 300 300" fill="none">
-<path d="M 245.00 150.00 Q 256.27 174.25 235.59 191.22 Q 235.22 217.96 209.23 224.27 Q 197.29 248.21 171.14 242.62 Q 150.00 259.00 128.86 242.62 Q 102.71 248.21 90.77 224.27 Q 64.78 217.96 64.41 191.22 Q 43.73 174.25 55.00 150.00 Q 43.73 125.75 64.41 108.78 Q 64.78 82.04 90.77 75.73 Q 102.71 51.79 128.86 57.38 Q 150.00 41.00 171.14 57.38 Q 197.29 51.79 209.23 75.73 Q 235.22 82.04 235.59 108.78 Q 256.27 125.75 245.00 150.00 Z" stroke="#7c1f1f" stroke-width="4" fill="none"/>
-</svg>
+<div class="gift-frame">
+<div class="gift-photo" style="background-image:url('foto-pengantin.jpg'), linear-gradient(135deg,#f0ded0,#dcb8a8);"></div>
+<img class="gift-outline" src="gift-frame-outline.png" alt="" />
 </div>
 <div class="person left">
 <div class="name">Ardony Shofwan Muzaky</div>
