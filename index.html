@@ -104,7 +104,7 @@ body { font-family: 'Poppins', sans-serif; background: #dcceb4; color: var(--ink
 .content-panel .col { max-width: none; margin: 0; }
 
 section { position: relative; padding: 46px 30px; }
-.section-title { font-family: 'Caveat', cursive; color: var(--maroon); font-size: 1.7rem; text-align: center; margin: 0; display: inline-block; animation: titleGlow 3.6s ease-in-out infinite; }
+.section-title { font-family: 'Caveat', cursive; color: var(--maroon); font-size: 1.7rem; text-align: center; margin: 0 auto; display: block; animation: titleGlow 3.6s ease-in-out infinite; }
 #hero .cover-names { font-size: 2rem; margin-bottom: 6px; }
 .hero-illo-text .eyebrow { margin: 0 0 2px; font-size: 1rem; }
 .hero-illo-text .cover-names { margin: 0; font-size: 1.4rem; line-height: 1.1; }
@@ -188,16 +188,19 @@ section { position: relative; padding: 46px 30px; }
 #rsvp-section { background: var(--cream); }
 .field { margin-bottom: 16px; }
 .field label { font-size: .74rem; color: var(--ink-soft); display: block; margin-bottom: 5px; }
-.field input, .field textarea {
+.field select, .field input, .field textarea {
     width: 100%; padding: 8px 2px; border: none; border-bottom: 1.5px solid var(--line);
     font-family: 'Poppins', sans-serif; font-size: .9rem; background: transparent; color: var(--ink);
 }
-.field input:focus, .field textarea:focus { outline: none; border-bottom-color: var(--maroon); }
+.field select { cursor: pointer; outline: none; }
+.field select option { background: var(--cream); color: var(--ink); }
+.field select:focus, .field input:focus, .field textarea:focus { outline: none; border-bottom-color: var(--maroon); }
 .field textarea { resize: vertical; min-height: 58px; }
 #rsvpForm .btn { width: 100%; justify-content: center; margin-top: 8px; border-radius: 6px 40px 6px 40px; }
 .wish-list { margin-top: 16px; display: flex; flex-direction: column; max-height: 190px; overflow: auto; }
 .wish-item { padding: 11px 2px; font-size: .8rem; border-bottom: 1px dotted var(--line); }
 .wish-item b { color: var(--maroon); font-family: 'Cormorant Garamond', serif; font-size: .95rem; }
+.wish-item .status { font-size: .65rem; color: var(--ink-soft); float: right; font-weight: 500; font-family: 'Poppins', sans-serif; }
 .wish-empty { text-align: center; color: var(--ink-soft); font-size: .78rem; padding: 10px 0; }
 
 /* GIFTS & FOOTER */
@@ -223,7 +226,7 @@ footer .mono { font-family: 'Cormorant Garamond', serif; font-style: italic; fon
 .footer-illustration { display: block; width: 100%; max-width: 190px; height: auto; margin: 0 auto 20px; filter: drop-shadow(0 10px 16px rgba(60,30,20,0.22)); }
 .story-illustration { display: block; width: 100%; max-width: 210px; height: auto; margin: 6px auto 20px; filter: drop-shadow(0 12px 18px rgba(60,30,20,0.22)); animation: storyIlloEnter .9s cubic-bezier(.22,1,.36,1) both, storyIlloFloat 5.5s ease-in-out .9s infinite; }
 
-/* FRAMES (PIGORA ASLI TIDAK DIUBAH) */
+/* FRAMES */
 .gift-frame { position: relative; width: 220px; aspect-ratio: 700/1032; margin: 0 auto 22px; animation: pigoraFloat 6s ease-in-out infinite; }
 .gift-photo {
     position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform .4s cubic-bezier(.34,1.56,.64,1);
@@ -456,6 +459,15 @@ footer .mono { font-family: 'Cormorant Garamond', serif; font-style: italic; fon
                             <input type="text" id="rsvpName" placeholder="Nama kamu" required>
                         </div>
                         <div class="field">
+                            <label>Konfirmasi Kehadiran</label>
+                            <select id="rsvpStatus" required>
+                                <option value="" disabled selected>Pilih kehadiran</option>
+                                <option value="Hadir">Hadir</option>
+                                <option value="Tidak Hadir">Tidak Hadir</option>
+                                <option value="Ragu-ragu">Masih Ragu</option>
+                            </select>
+                        </div>
+                        <div class="field">
                             <label>Ucapan &amp; Doa</label>
                             <textarea id="rsvpMsg" placeholder="Tulis ucapan dan doa untuk Ardony & Eka..." required></textarea>
                         </div>
@@ -588,15 +600,16 @@ document.querySelectorAll('.copy-btn').forEach(btn => {
 document.getElementById('rsvpForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const name = document.getElementById('rsvpName').value.trim();
+    const status = document.getElementById('rsvpStatus').value;
     const msg = document.getElementById('rsvpMsg').value.trim();
-    if (!name || !msg) return;
+    if (!name || !status || !msg) return;
 
     const list = document.getElementById('wishList');
     list.querySelector('.wish-empty')?.remove();
 
     const item = document.createElement('div');
     item.className = 'wish-item';
-    item.innerHTML = `<b>${name.replace(/</g, '&lt;')}</b><br>${msg.replace(/</g, '&lt;')}`;
+    item.innerHTML = `<span class="status">(${status})</span><b>${name.replace(/</g, '&lt;')}</b><br>${msg.replace(/</g, '&lt;')}`;
     list.prepend(item);
     this.reset();
 });
