@@ -149,13 +149,14 @@ section { position: relative; padding: 46px 30px; }
 .p3:active, .p3:hover { transform: rotate(8deg) scale(1.08); box-shadow: 0 16px 28px -12px rgba(60,30,20,0.5); z-index: 5; animation-play-state: paused; }
 
 /* BRIDE & GROOM */
-#bg-section { background: var(--cream); }
-.person { text-align: center; margin-bottom: 14px; }
-.person.left { text-align: left; padding-left: 16px; }
-.person.right { text-align: right; padding-right: 16px; }
-.person .name { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; color: var(--maroon); margin-bottom: 4px; }
-.person .desc { font-size: .8rem; color: var(--ink-soft); line-height: 1.6; }
-.amp { text-align: center; font-family: 'Caveat', cursive; font-size: 1.7rem; color: var(--rose); margin: 2px 0; }
+#bg-section { background: var(--cream); padding-top: 36px; padding-bottom: 30px; }
+#bg-section .section-title { display: block; text-align: center; margin-bottom: 20px; }
+.person { margin-bottom: 12px; }
+.person.left { text-align: left; padding-left: 6px; }
+.person.right { text-align: right; padding-right: 6px; }
+.person .name { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 1.52rem; color: var(--maroon); margin-bottom: 3px; line-height: 1.25; }
+.person .desc { font-size: .82rem; color: var(--ink-soft); line-height: 1.6; }
+.amp { text-align: center; font-family: 'Caveat', cursive; font-size: 1.85rem; color: var(--rose); margin: 6px 0; }
 
 /* CALENDAR & VENUE */
 .cal-strip { display: flex; justify-content: center; align-items: flex-end; gap: 20px; margin-bottom: 22px; }
@@ -217,12 +218,12 @@ footer .mono { font-family: 'Cormorant Garamond', serif; font-style: italic; fon
 .fade-up.in { opacity: 1; transform: translateY(0); }
 
 .deco-divider { display: block; width: 150px; height: auto; margin: 8px auto 18px; opacity: .9; animation: dividerPulse 4.5s ease-in-out infinite; }
-.ring-divider { width: 64px; margin: 10px auto 18px; }
+.ring-divider { width: 64px; margin: 20px auto 10px; }
 .hearts-divider { width: 100%; max-width: 260px; height: auto; margin: 8px auto 18px; }
 .footer-illustration { display: block; width: 100%; max-width: 190px; height: auto; margin: 0 auto 20px; filter: drop-shadow(0 10px 16px rgba(60,30,20,0.22)); }
 .story-illustration { display: block; width: 100%; max-width: 210px; height: auto; margin: 6px auto 20px; filter: drop-shadow(0 12px 18px rgba(60,30,20,0.22)); animation: storyIlloEnter .9s cubic-bezier(.22,1,.36,1) both, storyIlloFloat 5.5s ease-in-out .9s infinite; }
 
-/* FRAMES */
+/* FRAMES (PIGORA ASLI TIDAK DIUBAH) */
 .gift-frame { position: relative; width: 220px; aspect-ratio: 700/1032; margin: 0 auto 22px; animation: pigoraFloat 6s ease-in-out infinite; }
 .gift-photo {
     position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform .4s cubic-bezier(.34,1.56,.64,1);
@@ -411,7 +412,7 @@ footer .mono { font-family: 'Cormorant Garamond', serif; font-style: italic; fon
                     <div class="amp">&amp;</div>
                     <div class="person right">
                         <div class="name">Nur Eka Wati</div>
-                        <div class="desc">Putri kedua dari<br>Bpk. Suratman &amp; Ibu Khotijah</div>
+                        <div class="desc">Putri pertama dari<br>Bpk. Suratman &amp; Ibu Khotijah</div>
                     </div>
                     <img class="deco-divider ring-divider" src="ring-icon.png" alt=""/>
                 </section>
