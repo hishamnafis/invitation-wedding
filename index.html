@@ -104,7 +104,7 @@ body { font-family: 'Poppins', sans-serif; background: #dcceb4; color: var(--ink
 .content-panel .col { max-width: none; margin: 0; }
 
 section { position: relative; padding: 46px 30px; }
-.section-title { font-family: 'Caveat', cursive; color: var(--maroon); font-size: 1.7rem; text-align: center; margin: 0 auto; display: block; animation: titleGlow 3.6s ease-in-out infinite; }
+.section-title { font-family: 'Caveat', cursive; color: var(--maroon); font-size: 1.7rem; text-align: center; margin: 0; display: inline-block; animation: titleGlow 3.6s ease-in-out infinite; }
 #hero .cover-names { font-size: 2rem; margin-bottom: 6px; }
 .hero-illo-text .eyebrow { margin: 0 0 2px; font-size: 1rem; }
 .hero-illo-text .cover-names { margin: 0; font-size: 1.4rem; line-height: 1.1; }
@@ -149,14 +149,13 @@ section { position: relative; padding: 46px 30px; }
 .p3:active, .p3:hover { transform: rotate(8deg) scale(1.08); box-shadow: 0 16px 28px -12px rgba(60,30,20,0.5); z-index: 5; animation-play-state: paused; }
 
 /* BRIDE & GROOM */
-#bg-section { background: var(--cream); padding-top: 38px; }
-#bg-section .section-title { margin-bottom: 18px; }
-.person { margin-bottom: 8px; }
-.person.left { text-align: left; padding-left: 10px; }
-.person.right { text-align: right; padding-right: 10px; }
-.person .name { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 1.55rem; color: var(--maroon); margin-bottom: 3px; line-height: 1.2; }
-.person .desc { font-size: .82rem; color: var(--ink-soft); line-height: 1.6; }
-.amp { text-align: center; font-family: 'Caveat', cursive; font-size: 1.8rem; color: var(--rose); margin: 6px 0; }
+#bg-section { background: var(--cream); }
+.person { text-align: center; margin-bottom: 14px; }
+.person.left { text-align: left; padding-left: 16px; }
+.person.right { text-align: right; padding-right: 16px; }
+.person .name { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 1.5rem; color: var(--maroon); margin-bottom: 4px; }
+.person .desc { font-size: .8rem; color: var(--ink-soft); line-height: 1.6; }
+.amp { text-align: center; font-family: 'Caveat', cursive; font-size: 1.7rem; color: var(--rose); margin: 2px 0; }
 
 /* CALENDAR & VENUE */
 .cal-strip { display: flex; justify-content: center; align-items: flex-end; gap: 20px; margin-bottom: 22px; }
@@ -218,17 +217,17 @@ footer .mono { font-family: 'Cormorant Garamond', serif; font-style: italic; fon
 .fade-up.in { opacity: 1; transform: translateY(0); }
 
 .deco-divider { display: block; width: 150px; height: auto; margin: 8px auto 18px; opacity: .9; animation: dividerPulse 4.5s ease-in-out infinite; }
-.ring-divider { width: 64px; margin: 18px auto 10px; }
+.ring-divider { width: 64px; margin: 10px auto 18px; }
 .hearts-divider { width: 100%; max-width: 260px; height: auto; margin: 8px auto 18px; }
 .footer-illustration { display: block; width: 100%; max-width: 190px; height: auto; margin: 0 auto 20px; filter: drop-shadow(0 10px 16px rgba(60,30,20,0.22)); }
 .story-illustration { display: block; width: 100%; max-width: 210px; height: auto; margin: 6px auto 20px; filter: drop-shadow(0 12px 18px rgba(60,30,20,0.22)); animation: storyIlloEnter .9s cubic-bezier(.22,1,.36,1) both, storyIlloFloat 5.5s ease-in-out .9s infinite; }
 
 /* FRAMES */
-.gift-frame { position: relative; width: 220px; aspect-ratio: 700/1032; margin: 0 auto 26px; animation: pigoraFloat 6s ease-in-out infinite; }
+.gift-frame { position: relative; width: 220px; aspect-ratio: 700/1032; margin: 0 auto 22px; animation: pigoraFloat 6s ease-in-out infinite; }
 .gift-photo {
     position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform .4s cubic-bezier(.34,1.56,.64,1);
-    clip-path: polygon(50% 12%, 60% 14%, 72% 19%, 78% 27%, 81% 37%, 82% 50%, 82% 65%, 79% 76%, 74% 86%, 66% 93%, 50% 95%, 34% 93%, 26% 86%, 21% 76%, 18% 65%, 18% 50%, 19% 37%, 22% 27%, 28% 19%, 40% 14%);
-    -webkit-clip-path: polygon(50% 12%, 60% 14%, 72% 19%, 78% 27%, 81% 37%, 82% 50%, 82% 65%, 79% 76%, 74% 86%, 66% 93%, 50% 95%, 34% 93%, 26% 86%, 21% 76%, 18% 65%, 18% 50%, 19% 37%, 22% 27%, 28% 19%, 40% 14%);
+    clip-path: polygon(67.14% 4.65%, 60.86% 6.01%, 50.57% 5.81%, 53.14% 9.21%, 53.57% 15.79%, 58.57% 18.80%, 58.86% 23.26%, 61.57% 27.91%, 57.86% 22.87%, 57.43% 18.80%, 52.43% 15.60%, 51.71% 8.43%, 47.00% 5.91%, 41.00% 8.53%, 40.43% 12.98%, 35.57% 17.54%, 34.57% 21.41%, 30.71% 24.42%, 31.57% 27.33%, 29.86% 26.36%, 29.71% 24.32%, 33.86% 20.93%, 34.57% 17.73%, 39.00% 13.86%, 40.00% 8.33%, 43.57% 6.10%, 41.71% 5.23%, 20.86% 7.56%, 15.57% 10.08%, 11.14% 13.86%, 12.86% 20.83%, 6.43% 25.39%, 4.71% 27.81%, 6.57% 34.59%, 1.71% 42.73%, 2.14% 46.03%, 5.29% 50.48%, 2.43% 60.47%, 5.00% 66.28%, 2.43% 74.52%, 3.00% 78.97%, 9.71% 82.17%, 13.29% 89.34%, 33.43% 98.16%, 67.86% 97.29%, 75.29% 93.02%, 84.43% 89.44%, 88.29% 83.72%, 95.29% 76.84%, 95.43% 68.99%, 97.43% 63.95%, 95.57% 55.43%, 97.57% 47.97%, 95.00% 41.38%, 97.29% 32.46%, 96.57% 29.17%, 89.43% 22.58%, 82.14% 10.37%);
+    -webkit-clip-path: polygon(67.14% 4.65%, 60.86% 6.01%, 50.57% 5.81%, 53.14% 9.21%, 53.57% 15.79%, 58.57% 18.80%, 58.86% 23.26%, 61.57% 27.91%, 57.86% 22.87%, 57.43% 18.80%, 52.43% 15.60%, 51.71% 8.43%, 47.00% 5.91%, 41.00% 8.53%, 40.43% 12.98%, 35.57% 17.54%, 34.57% 21.41%, 30.71% 24.42%, 31.57% 27.33%, 29.86% 26.36%, 29.71% 24.32%, 33.86% 20.93%, 34.57% 17.73%, 39.00% 13.86%, 40.00% 8.33%, 43.57% 6.10%, 41.71% 5.23%, 20.86% 7.56%, 15.57% 10.08%, 11.14% 13.86%, 12.86% 20.83%, 6.43% 25.39%, 4.71% 27.81%, 6.57% 34.59%, 1.71% 42.73%, 2.14% 46.03%, 5.29% 50.48%, 2.43% 60.47%, 5.00% 66.28%, 2.43% 74.52%, 3.00% 78.97%, 9.71% 82.17%, 13.29% 89.34%, 33.43% 98.16%, 67.86% 97.29%, 75.29% 93.02%, 84.43% 89.44%, 88.29% 83.72%, 95.29% 76.84%, 95.43% 68.99%, 97.43% 63.95%, 95.57% 55.43%, 97.57% 47.97%, 95.00% 41.38%, 97.29% 32.46%, 96.57% 29.17%, 89.43% 22.58%, 82.14% 10.37%);
 }
 .gift-frame:hover .gift-photo { transform: scale(1.04); }
 .gift-outline { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; filter: drop-shadow(0 10px 16px rgba(60,30,20,.3)); }
@@ -412,7 +411,7 @@ footer .mono { font-family: 'Cormorant Garamond', serif; font-style: italic; fon
                     <div class="amp">&amp;</div>
                     <div class="person right">
                         <div class="name">Nur Eka Wati</div>
-                        <div class="desc">Putri pertama dari<br>Bpk. Suratman &amp; Ibu Khotijah</div>
+                        <div class="desc">Putri kedua dari<br>Bpk. Suratman &amp; Ibu Khotijah</div>
                     </div>
                     <img class="deco-divider ring-divider" src="ring-icon.png" alt=""/>
                 </section>
