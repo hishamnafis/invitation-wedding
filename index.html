@@ -7,6 +7,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@300;400;500;600&family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
+<!-- FIREBASE SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
 <style>
 :root {
     --cream: #f6f0e5; --cream-2: #efe3cf; --maroon: #7c1f1f; --maroon-2: #9a2f2a;
@@ -197,11 +201,19 @@ section { position: relative; padding: 46px 30px; }
 .field select:focus, .field input:focus, .field textarea:focus { outline: none; border-bottom-color: var(--maroon); }
 .field textarea { resize: vertical; min-height: 58px; }
 #rsvpForm .btn { width: 100%; justify-content: center; margin-top: 8px; border-radius: 6px 40px 6px 40px; }
-.wish-list { margin-top: 16px; display: flex; flex-direction: column; max-height: 190px; overflow: auto; }
-.wish-item { padding: 11px 2px; font-size: .8rem; border-bottom: 1px dotted var(--line); }
-.wish-item b { color: var(--maroon); font-family: 'Cormorant Garamond', serif; font-size: .95rem; }
-.wish-item .status { font-size: .65rem; color: var(--ink-soft); float: right; font-weight: 500; font-family: 'Poppins', sans-serif; }
-.wish-empty { text-align: center; color: var(--ink-soft); font-size: .78rem; padding: 10px 0; }
+.wish-list {
+    margin-top: 20px; display: flex; flex-direction: column; max-height: 240px; overflow-y: auto;
+    scrollbar-width: thin; padding-right: 4px;
+}
+.wish-item { padding: 10px 2px; font-size: .82rem; border-bottom: 1px dotted var(--line); line-height: 1.5; }
+.wish-item b { color: var(--maroon); font-family: 'Cormorant Garamond', serif; font-size: 1rem; }
+.wish-item .status-badge {
+    float: right; font-size: .65rem; padding: 2px 8px; border-radius: 12px;
+    font-weight: 600; font-family: 'Poppins', sans-serif;
+}
+.status-badge.hadir { background: rgba(46, 125, 50, 0.15); color: #2e7d32; }
+.status-badge.berhalangan { background: rgba(198, 40, 40, 0.15); color: #c62828; }
+.wish-empty { text-align: center; color: var(--ink-soft); font-size: .8rem; padding: 14px 0; }
 
 /* GIFTS & FOOTER */
 .bank-card { padding: 14px 4px; border-bottom: 1px dashed var(--line); display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px; }
@@ -463,18 +475,18 @@ footer .mono { font-family: 'Cormorant Garamond', serif; font-style: italic; fon
                             <select id="rsvpStatus" required>
                                 <option value="" disabled selected>Pilih kehadiran</option>
                                 <option value="Hadir">Hadir</option>
-                                <option value="Tidak Hadir">Tidak Hadir</option>
-                                <option value="Ragu-ragu">Masih Ragu</option>
+                                <option value="Berhalangan">Berhalangan</option>
                             </select>
                         </div>
                         <div class="field">
                             <label>Ucapan &amp; Doa</label>
                             <textarea id="rsvpMsg" placeholder="Tulis ucapan dan doa untuk Ardony & Eka..." required></textarea>
                         </div>
-                        <button type="submit" class="btn">Kirim RSVP</button>
+                        <button type="submit" id="rsvpSubmitBtn" class="btn">Kirim RSVP</button>
                     </form>
+
                     <div class="wish-list" id="wishList">
-                        <p class="wish-empty">Ucapan &amp; doa akan muncul di sini.</p>
+                        <p class="wish-empty">Belum ada ucapan. Jadilah yang pertama memberikan doa restu!</p>
                     </div>
                 </section>
 
@@ -516,6 +528,28 @@ footer .mono { font-family: 'Cormorant Garamond', serif; font-style: italic; fon
 </div>
 
 <script>
+// =========================================
+// KONFIGURASI FIREBASE DATABASE
+// =========================================
+// Masukkan kredensial Firebase Realtime Database kamu di sini:
+const firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+    databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+    projectId: "YOUR_PROJECT_ID",
+    storageBucket: "YOUR_PROJECT_ID.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID"
+};
+
+let db = null;
+try {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.database();
+} catch (e) {
+    console.warn("Firebase belum diatur. Menggunakan LocalStorage sebagai fallback lokal.");
+}
+
 // AUDIO
 const bgAudio = document.getElementById('bgAudio');
 const audioDebug = document.getElementById('audioDebug');
@@ -528,7 +562,7 @@ const showAudioDebug = (msg) => {
 };
 
 bgAudio.addEventListener('error', () => {
-    showAudioDebug('Gagal memuat file musik. Cek: file "you-me-paul-partohap.mp3" harus ada di folder GitHub yang sama dengan file HTML ini, dan namanya harus persis sama.');
+    showAudioDebug('Gagal memuat file musik. Cek: file "you-me-paul-partohap.mp3" harus ada di folder GitHub yang sama dengan file HTML ini.');
 });
 
 const startMusic = () => {
@@ -581,7 +615,7 @@ const tickCountdown = () => {
 tickCountdown();
 setInterval(tickCountdown, 1000);
 
-// EVENTS
+// COPY REKENING
 musicToggle.addEventListener('click', () => bgAudio.paused ? startMusic() : pauseMusic());
 
 document.querySelectorAll('.copy-btn').forEach(btn => {
@@ -597,6 +631,47 @@ document.querySelectorAll('.copy-btn').forEach(btn => {
     });
 });
 
+// =========================================
+// SINKRONISASI RSVP
+// =========================================
+const wishList = document.getElementById('wishList');
+
+function renderWishes(wishes) {
+    if (!wishes || Object.keys(wishes).length === 0) {
+        wishList.innerHTML = '<p class="wish-empty">Belum ada ucapan. Jadilah yang pertama memberikan doa restu!</p>';
+        return;
+    }
+    
+    wishList.innerHTML = '';
+    const arr = Object.values(wishes).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+    
+    arr.forEach(w => {
+        const item = document.createElement('div');
+        item.className = 'wish-item';
+        const isHadir = w.status === 'Hadir';
+        const badgeClass = isHadir ? 'hadir' : 'berhalangan';
+        
+        item.innerHTML = `
+            <span class="status-badge ${badgeClass}">${w.status}</span>
+            <b>${w.name.replace(/</g, '&lt;')}</b><br>
+            ${w.msg.replace(/</g, '&lt;')}
+        `;
+        wishList.appendChild(item);
+    });
+}
+
+// Baca data secara live
+if (db) {
+    db.ref('rsvps').on('value', snapshot => {
+        renderWishes(snapshot.val() || {});
+    });
+} else {
+    // Fallback lokal jika belum memasukkan key Firebase
+    const local = JSON.parse(localStorage.getItem('wedding_rsvps') || '{}');
+    renderWishes(local);
+}
+
+// Kirim RSVP
 document.getElementById('rsvpForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const name = document.getElementById('rsvpName').value.trim();
@@ -604,14 +679,37 @@ document.getElementById('rsvpForm').addEventListener('submit', function(e) {
     const msg = document.getElementById('rsvpMsg').value.trim();
     if (!name || !status || !msg) return;
 
-    const list = document.getElementById('wishList');
-    list.querySelector('.wish-empty')?.remove();
+    const btn = document.getElementById('rsvpSubmitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Mengirim...';
 
-    const item = document.createElement('div');
-    item.className = 'wish-item';
-    item.innerHTML = `<span class="status">(${status})</span><b>${name.replace(/</g, '&lt;')}</b><br>${msg.replace(/</g, '&lt;')}`;
-    list.prepend(item);
-    this.reset();
+    const newRsvp = {
+        name: name,
+        status: status,
+        msg: msg,
+        timestamp: Date.now()
+    };
+
+    if (db) {
+        db.ref('rsvps').push(newRsvp).then(() => {
+            btn.disabled = false;
+            btn.textContent = 'Kirim RSVP';
+            this.reset();
+        }).catch(err => {
+            alert('Gagal mengirim data: ' + err.message);
+            btn.disabled = false;
+            btn.textContent = 'Kirim RSVP';
+        });
+    } else {
+        const local = JSON.parse(localStorage.getItem('wedding_rsvps') || '{}');
+        const id = 'rsvp_' + Date.now();
+        local[id] = newRsvp;
+        localStorage.setItem('wedding_rsvps', JSON.stringify(local));
+        renderWishes(local);
+        btn.disabled = false;
+        btn.textContent = 'Kirim RSVP';
+        this.reset();
+    }
 });
 
 // SCROLL ANIMATION
