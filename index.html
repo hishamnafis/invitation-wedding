@@ -49,12 +49,13 @@ body { font-family: 'Poppins', sans-serif; background: #dcceb4; color: var(--ink
 .cover-left { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; z-index: 2; transform: rotate(-1.5deg); animation: enterLeft 1s cubic-bezier(.22,1,.36,1) both .15s; }
 .ring-icon { width: 56px; height: auto; display: block; margin: 0 auto 4px; align-self: center; animation: floatIcon 4.5s ease-in-out infinite; transform-origin: center; }
 .eyebrow { font-family: 'Caveat', cursive; font-size: 1.5rem; color: var(--ink-soft); margin: 0; }
-.monogram {
-    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 4.6rem;
-    color: var(--maroon); line-height: 1; margin-top: 2px;
-    background: linear-gradient(100deg, var(--maroon) 40%, #c98a6a 50%, var(--maroon) 60%);
-    background-size: 300% 100%; -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent; animation: shimmerText 5s ease-in-out infinite;
+.monogram-img {
+    display: block;
+    width: 130px;
+    max-width: 100%;
+    height: auto;
+    margin-top: 6px;
+    animation: floatIcon 5s ease-in-out infinite;
 }
 .cover-center { text-align: center; z-index: 2; transform: rotate(0.6deg); position: relative; animation: enterUp 1.05s cubic-bezier(.22,1,.36,1) both .35s; }
 .cover-names { font-family: 'Baloo 2', sans-serif; font-weight: 700; font-size: 2.5rem; color: var(--ink); margin: 0; }
@@ -238,7 +239,15 @@ section { position: relative; padding: 46px 30px; }
 footer { text-align: center; padding: 44px 28px 52px; }
 footer .thanks { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 1.7rem; color: var(--maroon); margin-bottom: 4px; }
 footer .sub { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--ink-soft); margin-bottom: 18px; }
-footer .mono { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.8rem; color: var(--rose); display: inline-block; animation: heartbeatMono 3s ease-in-out infinite; }
+footer .mono-img {
+    display: block;
+    width: 65px;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    opacity: .85;
+    animation: heartbeatMono 3s ease-in-out infinite;
+}
 
 .fade-up { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
 .fade-up.in { opacity: 1; transform: translateY(0); }
@@ -303,18 +312,18 @@ footer .mono { font-family: 'Cormorant Garamond', serif; font-style: italic; fon
     #cover { flex-direction: column; justify-content: center; align-items: center; gap: 26px; padding: 32px 24px; text-align: center; }
     .cover-left, .cover-right, .to-guest { align-items: center; text-align: center; }
     .cover-center { order: -1; }
-    .monogram { font-size: clamp(2.6rem,12vw,3.6rem); }
+    .monogram-img { width: 100px; margin-top: 4px; }
     .cover-names { font-size: clamp(1.6rem,7vw,2.2rem); }
     .eyebrow { font-size: clamp(1.1rem,5vw,1.4rem); }
     .content-panel .col { max-width: 100%; padding: 0 4px; }
     .couple-illustration { max-width: 110px; }
 }
-@media(max-width:380px) { .monogram { font-size: 2.4rem; } .cover-names { font-size: 1.4rem; } }
+@media(max-width:380px) { .monogram-img { width: 85px; } .cover-names { font-size: 1.4rem; } }
 @media (prefers-reduced-motion:reduce) {
-    .ring-icon, .monogram, .cover-names .amp-swash, #openBtn, .cover-left, .cover-center, .cover-right,
+    .ring-icon, .cover-names .amp-swash, #openBtn, .cover-left, .cover-center, .cover-right,
     .cd .num.tick, .cd-sep, .slide .inner, .polaroid, .couple-illustration, .hero-illo-wrap, .flourish.tl,
     .flourish.br, #guestName, .p1, .p2, .p3, .gift-frame, .cal-ring, .deco-divider, .section-title,
-    .verse-wrap, .bank-card .bk-num, footer .mono { animation: none!important; transition: none!important; opacity: 1!important; }
+    .verse-wrap, .bank-card .bk-num, footer .mono-img { animation: none!important; transition: none!important; opacity: 1!important; }
 }
 </style>
 </head>
@@ -330,7 +339,7 @@ footer .mono { font-family: 'Cormorant Garamond', serif; font-style: italic; fon
         <div class="cover-left">
             <img class="ring-icon" src="ring-icon.png" alt=""/>
             <p class="eyebrow">The Wedding Of</p>
-            <div class="monogram">A&amp;E</div>
+            <img class="monogram-img" src="monogram-ae.png" alt="A & E Monogram"/>
         </div>
         <div class="cover-center">
             <img class="couple-illustration" src="couple-illustration.png" alt="Ardony & Eka"/>
@@ -531,7 +540,7 @@ footer .mono { font-family: 'Cormorant Garamond', serif; font-style: italic; fon
                     <img class="footer-illustration" src="our-story-illustration.png" alt="Ardony & Eka"/>
                     <p class="thanks">See You Soon</p>
                     <p class="sub">on our special day!</p>
-                    <p class="mono">A &amp; E</p>
+                    <img class="mono-img" src="monogram-ae.png" alt="A & E"/>
                 </footer>
             </div>
         </div>
