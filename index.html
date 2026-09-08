@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
 <title>The Wedding of Ardony & Eka</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Baloo+2:wght@500;600;700;800&family=Poppins:wght@300;400;500;600&family=Amiri:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -219,7 +220,17 @@ section { position: relative; padding: 46px 30px; }
 .bank-card { padding: 14px 4px; border-bottom: 1px dashed var(--line); display: flex; align-items: center; justify-content: space-between; margin-bottom: 2px; }
 .bank-card .bk-name { font-family: 'Caveat', cursive; font-weight: 700; color: var(--maroon); font-size: 1.05rem; }
 .bank-card .bk-owner { font-size: .76rem; color: var(--ink-soft); margin: 2px 0; }
-.bank-card .bk-num { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; letter-spacing: 1px; font-weight: 600; display: inline-block; animation: bkNumFloat 4s ease-in-out infinite; }
+.bank-card .bk-num,
+.bank-card .bk-num a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: var(--ink) !important;
+    text-decoration: none !important;
+    pointer-events: auto;
+    display: inline-block;
+}
 .copy-btn { border: none; border-bottom: 1.5px solid var(--maroon); background: transparent; color: var(--maroon); padding: 4px 2px; font-size: .72rem; cursor: pointer; font-family: 'Poppins', sans-serif; }
 .copy-btn.copied { color: var(--ink-soft); border-color: var(--ink-soft); }
 .gift-note { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: .92rem; color: var(--ink-soft); line-height: 1.7; text-align: center; margin-top: 20px; }
@@ -532,7 +543,7 @@ footer .mono { font-family: 'Cormorant Garamond', serif; font-style: italic; fon
 // KONFIGURASI FIREBASE DATABASE
 // =========================================
 const firebaseConfig = {
-    apiKey: "AIzaSyBGtH1V3PLbTDwVAqPShCOkGUtNXFSlXlU",
+    apiKey: "PASTE_API_KEY_KAMU_DISINI",
     authDomain: "invitation-wedding-29ebf.firebaseapp.com",
     databaseURL: "https://invitation-wedding-29ebf-default-rtdb.firebaseio.com",
     projectId: "invitation-wedding-29ebf",
@@ -703,7 +714,6 @@ document.getElementById('rsvpForm').addEventListener('submit', function(e) {
     if (db) {
         let isDone = false;
 
-        // Batas waktu 4 detik agar tidak stuck loading jika koneksi Firebase bermasalah
         const timeout = setTimeout(() => {
             if (!isDone) {
                 isDone = true;
